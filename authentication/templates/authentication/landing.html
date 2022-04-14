@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h2>Bienvenue sur LITReview !</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <h3>Inscrivez-vous maintenant</h3>
+                <a class="btn btn-primary" href="{% url 'signup' %}" role="button">S'inscrire</a>
+            </div>
+            <div class="col-12 col-lg-6">
+                <h3>Connectez-vous</h3>
+                <p>
+                    {{ message }}
+                </p>
+                <form method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

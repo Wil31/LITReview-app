@@ -23,9 +23,9 @@ import blog.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', LoginView.as_view(
-        template_name='authentication/login.html',
+        template_name='authentication/landing.html',
         redirect_authenticated_user=True,
-    ), name='login'),
+    ), name='landing'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', blog.views.home, name='home'),
     path('change-password', PasswordChangeView.as_view(
