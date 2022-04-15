@@ -2,16 +2,16 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="jumbotron">
+            <div class="jumbotron bg-light p-4 my-3 shadow" ALIGN='center'>
                 <h2>Bienvenue sur LITReview !</h2>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-6">
+        <div class="row" ALIGN='center'>
+            <div class="col-12 col-lg-6 pt-5">
                 <h3>Inscrivez-vous maintenant</h3>
-                <a class="btn btn-primary" href="{% url 'signup' %}" role="button">S'inscrire</a>
+                <a class="btn btn-primary shadow" href="{% url 'signup' %}" role="button">S'inscrire</a>
             </div>
             <div class="col-12 col-lg-6">
                 <h3>Connectez-vous</h3>
@@ -21,7 +21,7 @@
                 <form method="post">
                     {{ form.as_p }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                    <button type="submit" class="btn btn-primary shadow">Se connecter</button>
                 </form>
             </div>
         </div>

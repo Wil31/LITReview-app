@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Inscription</h2>
-    {% if form.errors %}{{ form.errors }}{% endif %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">S'inscrire</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron bg-light p-4 my-3" ALIGN='center'>
+                <h2>Inscrivez-vous</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% if form.errors %}{{ form.errors }}{% endif %}
+            <form method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">S'inscrire</button>
+                <a class="btn btn-secondary" href="{% url 'landing' %}" role="button">Retour</a>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

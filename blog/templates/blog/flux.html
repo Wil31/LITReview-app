@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
+                <h2>Bonjour, {{ request.user }}.</h2>
+            </div>
+        </div>
+        <div class="row my-3" ALIGN='center'>
+            <div class="col">
+                <a class="btn btn-info shadow" href="{% url 'create_ticket' %}" role="button">Demander une critique</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-info shadow" href="{% url 'create_review' %}" role="button">Creer une critique</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card border-secondary my-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Exemple d'un post dans le flux</h5>
+                        <p class="card-text">
+                            Contenu textuel du post
+                        </p>
+                    </div>
+                </div>
+                <div class="card border-secondary my-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Exemple d'un post dans le flux</h5>
+                        <p class="card-text">
+                            Contenu textuel du post
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

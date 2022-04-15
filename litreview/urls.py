@@ -27,7 +27,11 @@ urlpatterns = [
         redirect_authenticated_user=True,
     ), name='landing'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('home/', blog.views.home, name='home'),
+    path('flux/', blog.views.flux, name='flux'),
+    path('posts/', blog.views.posts, name='posts'),
+    path('subscriptions/', blog.views.subscriptions, name='subscriptions'),
+    path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
+    path('create_review/', blog.views.create_review, name='create_review'),
     path('change-password', PasswordChangeView.as_view(
         template_name='authentication/password_change_form.html'),
         name='password_change'),
