@@ -1,30 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
-                <h2>Vos posts</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card border-secondary my-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Exemple d'un post dans le flux</h5>
-                        <p class="card-text">
-                            Contenu textuel du post
-                        </p>
-                    </div>
-                </div>
-                <div class="card border-secondary my-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Exemple d'un post dans le flux</h5>
-                        <p class="card-text">
-                            Contenu textuel du post
-                        </p>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
+            <h2>Vos posts</h2>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            {% for ticket in tickets %}
+            <p>{{ ticket.title }}</p>
+            <p>{{ ticket.description }}</p>
+            <p><a href="{% url 'edit_ticket' ticket.id %}">Modifier le
+                ticket</a></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock content %}

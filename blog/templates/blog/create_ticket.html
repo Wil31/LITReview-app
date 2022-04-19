@@ -1,22 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
-                <h2>Creer un ticket</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card border-secondary my-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Exemple</h5>
-                        <p class="card-text">
-                            Contenu textuel
-                        </p>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
+            <h2>Créer un ticket</h2>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <form method="post" enctype="multipart/form-data">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit">Publier</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
