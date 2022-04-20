@@ -42,15 +42,15 @@ def edit_ticket(request, ticket_id):
     delete_form = forms.DeleteTicketForm()
     if request.method == 'POST':
         if 'edit_ticket' in request.POST:
-            edit_form = forms.TicketForm(request.POST, instance=ticket)
+            edit_form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
             if edit_form.is_valid():
                 edit_form.save()
-                return redirect('flux')
+                return redirect('posts')
             if 'delete_ticket' in request.POST:
                 delete_form = forms.DeleteTicketForm(request.POST)
                 if delete_form.is_valid():
                     ticket.delete()
-                    return redirect('flux')
+                    return redirect('posts')
     context = {
         'edit_form': edit_form,
         'delete_form': delete_form,

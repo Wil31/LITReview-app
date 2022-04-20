@@ -2,16 +2,22 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
-            <h2>Vos posts</h2>
+        <div class="col">
+            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
+                <h2>Vos posts</h2>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
             {% for ticket in tickets %}
-            <p>{{ ticket.title }}</p>
+            <h4>{{ ticket.title }}</h4>
             <p>{{ ticket.description }}</p>
-            <p><a href="{% url 'edit_ticket' ticket.id %}">Modifier le
+            {% if ticket.image %}
+            <img src="{{ ticket.image.url }}">
+            {% endif %}
+            <p>{{ ticket.time_created }}</p>
+            <p><a class="btn btn-info shadow" href="{% url 'edit_ticket' ticket.id %}">Modifier/supprimer le
                 ticket</a></p>
             {% endfor %}
         </div>

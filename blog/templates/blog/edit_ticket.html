@@ -1,16 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Modifier le ticket</h2>
-<form method="post">
-    {{ edit_form.as_p }}
-    {% csrf_token %}
-    <button type="submit">Sauvegarder</button>
-</form>
-<hr>
-<h3>Supprimer le ticket ?</h3>
-<form method="post">
-    {{ delete_form }}
-    {% csrf_token %}
-    <button type="submit">Supprimer</button>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
+            <h2>Modifier le ticket</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="post" enctype="multipart/form-data">
+                {{ edit_form.as_p }}
+                {% csrf_token %}
+                <button class="btn btn-success shadow" type="submit">
+                    Sauvegarder
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
+                <h3>Supprimer le ticket ?</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="post">
+                {{ delete_form }}
+                {% csrf_token %}
+                <button class="btn btn-danger shadow" type="submit">Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

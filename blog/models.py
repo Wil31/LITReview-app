@@ -13,27 +13,26 @@ class Ticket(models.Model):
     image = models.ImageField(null=True, blank=True, verbose_name='image')
     time_created = models.DateTimeField(auto_now_add=True)
 
-    IMAGE_MAX_SIZE = (800, 800)
-
-    def resize_image(self):
-        image = Image.open(self.image)
-        image.thumbnail(self.IMAGE_MAX_SIZE)
-        image.save(self.image.path)
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.resize_image()
+    # IMAGE_MAX_SIZE = (600, 600)
+    #
+    # def resize_image(self):
+    #     image = Image.open(self.image)
+    #     image.thumbnail(self.IMAGE_MAX_SIZE)
+    #     image.save(self.image.path)
+    #
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     self.resize_image()
 
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(validators=[
-        MinValueValidator(0),
-        MaxValueValidator(5)
-    ])
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0),
+                                                          MaxValueValidator(5)],
+                                              verbose_name='note')
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    headline = models.CharField(max_length=128)
-    body = models.TextField(max_length=8192, blank=True)
+    headline = models.CharField(max_length=128, verbose_name='titre')
+    body = models.TextField(max_length=8192, blank=True, verbose_name='description')
     time_created = models.DateTimeField(auto_now_add=True)
 
 
