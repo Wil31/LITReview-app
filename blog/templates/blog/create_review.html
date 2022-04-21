@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
-                <h2>Creer une critique</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card border-secondary my-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Exemple</h5>
-                        <p class="card-text">
-                            Contenu textuel
-                        </p>
-                    </div>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron bg-light p-2 my-2 shadow border"
+                 ALIGN='center'>
+                <h2>Créer une critique</h2>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col border border-secondary p-3 m-2">
+            <form method="post" enctype="multipart/form-data">
+                {{ form_ticket.as_p }}
+                <hr>
+                {{ form_review.as_p }}
+                {% csrf_token %}
+                <button class="btn btn-success" type="submit">Publier</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

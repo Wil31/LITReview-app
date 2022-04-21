@@ -1,3 +1,6 @@
+from itertools import chain
+
+from django.db.models import Value, CharField
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -6,13 +9,34 @@ from . import forms, models
 
 @login_required
 def flux(request):
-    return render(request, 'blog/flux.html')
+    reviews = models.Review.objects.filter(user=request.user)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    tickets = models.Ticket.objects.filter(user=request.user)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+
+    mixed_posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True
+    )
+    return render(request, 'blog/flux.html', context={'mixed_posts': mixed_posts})
 
 
 @login_required
 def posts(request):
-    tickets = models.Ticket.objects.all()
-    return render(request, 'blog/posts.html', context={'tickets': tickets})
+    reviews = models.Review.objects.filter(user=request.user)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    tickets = models.Ticket.objects.filter(user=request.user)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+
+    mixed_posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True
+    )
+    return render(request, 'blog/posts.html', context={'mixed_posts': mixed_posts})
 
 
 @login_required
@@ -27,9 +51,7 @@ def create_ticket(request):
         form = forms.TicketForm(request.POST, request.FILES)
         if form.is_valid():
             ticket = form.save(commit=False)
-            # set the uploader to the user before saving the model
             ticket.user = request.user
-            # now we can save
             ticket.save()
             return redirect('posts')
     return render(request, 'blog/create_ticket.html', context={'form': form})
@@ -60,4 +82,19 @@ def edit_ticket(request, ticket_id):
 
 @login_required
 def create_review(request):
-    return render(request, 'blog/create_review.html')
+    form_ticket = forms.TicketForm()
+    form_review = forms.ReviewForm()
+    if request.method == 'POST':
+        form_ticket = forms.TicketForm(request.POST, request.FILES)
+        form_review = forms.ReviewForm(request.POST, request.FILES)
+        if form_ticket.is_valid() and form_review.is_valid():
+            ticket = form_ticket.save(commit=False)
+            review = form_review.save(commit=False)
+            ticket.user = request.user
+            review.user = request.user
+            ticket.save()
+            review.save()
+            return redirect('posts')
+    return render(request, 'blog/create_review.html',
+                  context={'form_ticket': form_ticket,
+                           'form_review': form_review})

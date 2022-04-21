@@ -3,22 +3,19 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="jumbotron bg-light p-2 my-2 shadow" ALIGN='center'>
-                <h2>Vos posts</h2>
+            <div class="jumbotron bg-light p-2 my-2 shadow border" ALIGN='center'>
+                <h2>Mes posts</h2>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            {% for ticket in tickets %}
-            <h4>{{ ticket.title }}</h4>
-            <p>{{ ticket.description }}</p>
-            {% if ticket.image %}
-            <img src="{{ ticket.image.url }}">
+            {% for post in mixed_posts %}
+            {% if post.content_type == 'TICKET' %}
+            {% include 'blog/ticket_snippet.html' %}
+            {% elif post.content_type == 'REVIEW' %}
+            {% include 'blog/review_snippet.html' %}
             {% endif %}
-            <p>{{ ticket.time_created }}</p>
-            <p><a class="btn btn-info shadow" href="{% url 'edit_ticket' ticket.id %}">Modifier/supprimer le
-                ticket</a></p>
             {% endfor %}
         </div>
     </div>
