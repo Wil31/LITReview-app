@@ -68,11 +68,11 @@ def edit_ticket(request, ticket_id):
             if edit_form.is_valid():
                 edit_form.save()
                 return redirect('posts')
-            if 'delete_ticket' in request.POST:
-                delete_form = forms.DeleteTicketForm(request.POST)
-                if delete_form.is_valid():
-                    ticket.delete()
-                    return redirect('posts')
+        if 'delete_ticket' in request.POST:
+            delete_form = forms.DeleteTicketForm(request.POST)
+            if delete_form.is_valid():
+                ticket.delete()
+                return redirect('posts')
     context = {
         'edit_form': edit_form,
         'delete_form': delete_form,
@@ -86,15 +86,21 @@ def create_review(request):
     form_review = forms.ReviewForm()
     if request.method == 'POST':
         form_ticket = forms.TicketForm(request.POST, request.FILES)
-        form_review = forms.ReviewForm(request.POST, request.FILES)
-        if form_ticket.is_valid() and form_review.is_valid():
+        form_review = forms.ReviewForm(request.POST)
+        if all([form_ticket.is_valid(), form_review.is_valid()]):
             ticket = form_ticket.save(commit=False)
-            review = form_review.save(commit=False)
             ticket.user = request.user
-            review.user = request.user
+            ticket.closed = True
             ticket.save()
+            review = form_review.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
             review.save()
             return redirect('posts')
-    return render(request, 'blog/create_review.html',
-                  context={'form_ticket': form_ticket,
-                           'form_review': form_review})
+
+    context = {
+        'form_ticket': form_ticket,
+        'form_review': form_review
+    }
+
+    return render(request, 'blog/create_review.html', context=context)

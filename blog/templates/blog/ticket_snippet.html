@@ -1,24 +1,15 @@
-<div class="row">
-    <div class="col">
-        <div class="card my-2 border-secondary">
-            <div class="card-body">
-                {% if post.user.id == user.id %}
-                <div>Vous avez demandé une critique</div>
-                <div class="font-italic" align="right">{{ post.time_created }}</div>
-                {% else %}
-                <div>{{ post.user.username }} a demandé une critique</div>
-                <div align="right">{{ post.time_created }}</div>
-                {% endif %}
-                <h3 class="card-title">{{ post.title }}</h3>
-                <p class="card-text">{{ post.description }}</p>
-                {% if post.image %}
-                <img src="{{ post.image.url }}">
-                {% endif %}
-                {% if not post.ticket %}
-                <div align="right"><a class="btn btn-secondary" href="#">Créer
-                    une critique</a></div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+{% if post.user.id == user.id %}
+<div>Vous avez publié un ticket</div>
+<div align="right" class="font-italic">
+    {{ post.time_created }}
 </div>
+{% else %}
+<div>{{ post.user.username }} a publié un ticket</div>
+<div align="right">{{ post.time_created }}</div>
+{% endif %}
+<h3 class="card-title">{{ post.title }}</h3>
+<p class="card-text"> {{ post.description }}</p>
+{% if post.image %}
+<img src="{{ post.image.url }}">
+{% endif %}
+

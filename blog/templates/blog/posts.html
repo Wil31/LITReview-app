@@ -3,7 +3,8 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="jumbotron bg-light p-2 my-2 shadow border" ALIGN='center'>
+            <div class="jumbotron bg-light p-2 my-2 shadow border"
+                 ALIGN='center'>
                 <h2>Mes posts</h2>
             </div>
         </div>
@@ -12,9 +13,54 @@
         <div class="col">
             {% for post in mixed_posts %}
             {% if post.content_type == 'TICKET' %}
-            {% include 'blog/ticket_snippet.html' %}
+            <div class="row">
+                <div class="col">
+                    <div class="card my-2 border-secondary">
+                        <div class="card-body">
+                            {% include 'blog/ticket_snippet.html' %}
+                            <div class="row mt-2">
+                                <div class="col-3">
+                                    {% if post.user.id == user.id %}
+                                    <p>
+                                        <a class="btn btn-light shadow border border-secondary"
+                                           href="{% url 'edit_ticket' post.id %}">Modifier/Supprimer
+                                            ticket
+                                        </a>
+                                    </p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-9">
+                                    {% if post.closed != True %}
+                                    <a class="btn btn-primary shadow" href="#">Créer
+                                        une critique</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% elif post.content_type == 'REVIEW' %}
-            {% include 'blog/review_snippet.html' %}
+            <div class="row">
+                <div class="col">
+                    <div class="card my-2 border-secondary">
+                        <div class="card-body">
+                            {% include 'blog/review_snippet.html' %}
+                            {% if post.user.id == user.id %}
+                            <div class="row">
+                                <div class="col-2">
+                                    <p>
+                                        <a class="btn btn-light shadow border border-secondary"
+                                           href="#">Modifier/Supprimer
+                                            critique</a>
+                                    </p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endif %}
             {% endfor %}
         </div>

@@ -21,9 +21,29 @@
     </div>
     {% for post in mixed_posts %}
     {% if post.content_type == 'TICKET' %}
-    {% include 'blog/ticket_snippet.html' %}
+    <div class="row">
+        <div class="col">
+            <div class="card my-2 border-secondary">
+                <div class="card-body">
+                    {% include 'blog/ticket_snippet.html' %}
+                    {% if post.closed != True %}
+                    <div><a class="btn btn-primary mt-2 shadow" href="#">Créer
+                        une critique</a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
     {% elif post.content_type == 'REVIEW' %}
-    {% include 'blog/review_snippet.html' %}
+    <div class="row">
+        <div class="col">
+            <div class="card my-2 border-secondary">
+                <div class="card-body">
+                    {% include 'blog/review_snippet.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
     {% endfor %}
 </div>

@@ -1,0 +1,15 @@
+{% if post.user.id == user.id %}
+<div>Vous avez publié une critique</div>
+<div align="right" class="font-italic">
+    {{ post.time_created }}
+</div>
+{% else %}
+<div>{{ post.user.username }} a demandé une critique</div>
+<div align="right">{{ post.time_created }}</div>
+{% endif %}
+<h3 class="card-title">{{ post.headline }} - Note:
+    {{post.rating}}<span> ☆</span></h3>
+<div>
+    <p class="card-text">{{ post.body }}</p>
+</div>
+{% include 'blog/ticket_in_review_snippet.html' %}
