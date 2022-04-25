@@ -102,8 +102,29 @@ def create_review(request):
         'form_ticket': form_ticket,
         'form_review': form_review
     }
-
     return render(request, 'blog/create_review.html', context=context)
+
+
+@login_required
+def create_review_from_ticket(request, ticket_id=None):
+    existing_ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    form_review = forms.ReviewForm()
+    if request.method == 'POST':
+        form_review = forms.ReviewForm(request.POST)
+        if form_review.is_valid():
+            existing_ticket.closed = True
+            existing_ticket.save()
+            review = form_review.save(commit=False)
+            review.user = request.user
+            review.ticket = existing_ticket
+            review.save()
+            return redirect('posts')
+
+    context = {
+        'form_review': form_review,
+        'existing_ticket': existing_ticket
+    }
+    return render(request, 'blog/create_review_from_ticket.html', context=context)
 
 
 @login_required
@@ -121,7 +142,7 @@ def edit_review(request, review_id):
             delete_form = forms.DeleteReviewForm(request.POST)
             if delete_form.is_valid():
                 review.ticket.reopen()
-                print("suppression ici")
+                review.ticket.save()
                 review.delete()
                 return redirect('posts')
     context = {

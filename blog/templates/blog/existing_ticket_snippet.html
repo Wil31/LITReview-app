@@ -1,0 +1,17 @@
+<div class="card my-2 border-secondary">
+    <div class="card-body">
+        {% if existing_ticket.user.id == user.id %}
+        <div>Vous avez publié un ticket</div>
+        <div align="right" class="font-italic">{{ existing_ticket.time_created }}
+        </div>
+        {% else %}
+        <div>{{ existing_ticket.user.username }} a publié un ticket</div>
+        <div align="right">{{ existing_ticket.time_created }}</div>
+        {% endif %}
+        <h3 class="card-title">{{ existing_ticket.title }}</h3>
+        <p class="card-text">{{ existing_ticket.description }}</p>
+        {% if existing_ticket.image %}
+        <img src="{{ existing_ticket.image.url }}">
+        {% endif %}
+    </div>
+</div>

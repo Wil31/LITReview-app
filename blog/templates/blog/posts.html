@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-9">
                                     {% if not post.closed %}
-                                    <a class="btn btn-primary shadow" href="#">Créer
+                                    <a class="btn btn-primary shadow" href="{% url 'create_review_from_ticket' post.id %}">Créer
                                         une critique</a>
                                     {% endif %}
                                 </div>

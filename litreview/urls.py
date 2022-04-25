@@ -35,6 +35,9 @@ urlpatterns = [
     path('subscriptions/', blog.views.subscriptions, name='subscriptions'),
     path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
     path('create_review/', blog.views.create_review, name='create_review'),
+    path('create_review/<int:ticket_id>/',
+         blog.views.create_review_from_ticket,
+         name='create_review_from_ticket'),
     path('change-password', PasswordChangeView.as_view(
         template_name='authentication/password_change_form.html'),
          name='password_change'),

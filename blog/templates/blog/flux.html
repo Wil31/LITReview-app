@@ -27,7 +27,7 @@
                 <div class="card-body">
                     {% include 'blog/ticket_snippet.html' %}
                     {% if not post.closed %}
-                    <div><a class="btn btn-primary mt-2 shadow" href="#">Créer
+                    <div><a class="btn btn-primary mt-2 shadow" href="{% url 'create_review_from_ticket' post.id %}">Créer
                         une critique</a></div>
                     {% endif %}
                 </div>
