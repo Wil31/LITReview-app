@@ -26,7 +26,7 @@
             <div class="card my-2 border-secondary">
                 <div class="card-body">
                     {% include 'blog/ticket_snippet.html' %}
-                    {% if post.closed != True %}
+                    {% if not post.closed %}
                     <div><a class="btn btn-primary mt-2 shadow" href="#">Créer
                         une critique</a></div>
                     {% endif %}

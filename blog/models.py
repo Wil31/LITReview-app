@@ -26,6 +26,9 @@ class Ticket(models.Model):
         if self.image:
             self.resize_image()
 
+    def reopen(self):
+        self.closed = False
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)

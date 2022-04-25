@@ -30,7 +30,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-9">
-                                    {% if post.closed != True %}
+                                    {% if not post.closed %}
                                     <a class="btn btn-primary shadow" href="#">Créer
                                         une critique</a>
                                     {% endif %}
@@ -51,7 +51,7 @@
                                 <div class="col-2">
                                     <p>
                                         <a class="btn btn-light shadow border border-secondary"
-                                           href="#">Modifier/Supprimer
+                                           href="{% url 'edit_review' post.id %}">Modifier/Supprimer
                                             critique</a>
                                     </p>
                                 </div>

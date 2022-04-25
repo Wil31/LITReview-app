@@ -20,6 +20,8 @@ class DeleteTicketForm(forms.Form):
 
 
 class ReviewForm(forms.ModelForm):
+    edit_review = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
     class Meta:
         model = models.Review
         fields = ['headline', 'rating', 'body']
@@ -37,3 +39,7 @@ class ReviewForm(forms.ModelForm):
         widgets = {"rating": forms.RadioSelect(choices=CHOICES),
                    "body": forms.Textarea()
                    }
+
+
+class DeleteReviewForm(forms.Form):
+    delete_review = forms.BooleanField(widget=forms.HiddenInput, initial=True)

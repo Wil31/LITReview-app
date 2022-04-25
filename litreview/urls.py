@@ -42,7 +42,8 @@ urlpatterns = [
         template_name='authentication/password_change_done.html'),
          name='password_change_done'),
     path('signup/', authentication.views.signup_page, name='signup'),
-    path('blog/<int:ticket_id>/edit', blog.views.edit_ticket, name='edit_ticket'),
+    path('blog/<int:review_id>/editReview', blog.views.edit_review, name='edit_review'),
+    path('blog/<int:ticket_id>/editTicket', blog.views.edit_ticket, name='edit_ticket'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

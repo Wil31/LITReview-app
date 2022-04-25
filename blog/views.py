@@ -104,3 +104,28 @@ def create_review(request):
     }
 
     return render(request, 'blog/create_review.html', context=context)
+
+
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    edit_form = forms.ReviewForm(instance=review)
+    delete_form = forms.DeleteReviewForm()
+    if request.method == 'POST':
+        if 'edit_review' in request.POST:
+            edit_form = forms.ReviewForm(request.POST, request.FILES, instance=review)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('posts')
+        if 'delete_review' in request.POST:
+            delete_form = forms.DeleteReviewForm(request.POST)
+            if delete_form.is_valid():
+                review.ticket.reopen()
+                print("suppression ici")
+                review.delete()
+                return redirect('posts')
+    context = {
+        'edit_form': edit_form,
+        'delete_form': delete_form,
+    }
+    return render(request, 'blog/edit_review.html', context=context)
