@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 
 import authentication.views
 import blog.views
+import subscriptions.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +33,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('flux/', blog.views.flux, name='flux'),
     path('posts/', blog.views.posts, name='posts'),
-    path('subscriptions/', blog.views.subscriptions, name='subscriptions'),
     path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
     path('create_review/', blog.views.create_review, name='create_review'),
     path('create_review/<int:ticket_id>/',
@@ -47,6 +47,10 @@ urlpatterns = [
     path('signup/', authentication.views.signup_page, name='signup'),
     path('blog/<int:review_id>/editReview', blog.views.edit_review, name='edit_review'),
     path('blog/<int:ticket_id>/editTicket', blog.views.edit_ticket, name='edit_ticket'),
+    path('subscriptions/', subscriptions.views.subscriptions, name='subscriptions'),
+    path('<int:pk>/delete',
+         subscriptions.views.SubscriptionDeleteView.as_view(),
+         name='subscriptions_delete')
 ]
 if settings.DEBUG:
     urlpatterns += static(

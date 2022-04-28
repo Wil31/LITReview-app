@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron bg-light p-2 my-2 shadow border"
+                 ALIGN='center'>
+                <h2>Supprimer un utilisateur</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Êtes-vous sûr de ne plus vouloir suivre :
+                {{ object.followed_user.username }}?</p>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input class="btn btn-danger mt-2 shadow" type="submit" value="Confirmer">
+                <a class="btn btn-secondary mt-2 shadow" href="{% url 'subscriptions' %}">Annuler<a/>
+            </form>
+        </div>
+    </div>
+    </div>
+
+{% endblock content %}

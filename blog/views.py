@@ -9,10 +9,24 @@ from . import forms, models
 
 @login_required
 def flux(request):
-    reviews = models.Review.objects.filter(user=request.user)
+    followers = request.user.following.all()
+    followers_id = []
+    for follower in followers:
+        followers_id.append(follower.followed_user.pk)
+
+    ids_of_ticket_answerers = []
+    for ticket in models.Ticket.objects.filter(user=request.user):
+        for review in models.Review.objects.all():
+            if review.ticket == ticket:
+                ids_of_ticket_answerers.append(review.user.pk)
+
+    reviews = (models.Review.objects.filter(user=request.user) |
+               models.Review.objects.filter(user_id__in=followers_id) |
+               models.Review.objects.filter(user_id__in=ids_of_ticket_answerers))
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
-    tickets = models.Ticket.objects.filter(user=request.user)
+    tickets = (models.Ticket.objects.filter(user=request.user) |
+               models.Ticket.objects.filter(user_id__in=followers_id))
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
     mixed_posts = sorted(
