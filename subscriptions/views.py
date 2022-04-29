@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from authentication.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import DeleteView
-from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView
 
+from authentication.models import User
 from . import forms, models
 
 
@@ -24,7 +24,9 @@ def subscriptions(request):
             return redirect("subscriptions")
 
         for user in user_follows:
-            if user.followed_user.username == entry:
+            if (user.followed_user.username == entry) and (
+                user.user.username == current_user.username
+            ):
                 messages.warning(
                     request, f"You already follow : {user.followed_user.username}"
                 )
