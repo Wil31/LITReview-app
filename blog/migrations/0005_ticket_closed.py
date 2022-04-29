@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0004_alter_review_body_alter_review_headline_and_more'),
+        ("blog", "0004_alter_review_body_alter_review_headline_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='ticket',
-            name='closed',
+            model_name="ticket",
+            name="closed",
             field=models.BooleanField(default=False),
         ),
     ]

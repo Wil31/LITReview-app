@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, \
-    PasswordChangeDoneView
+from django.contrib.auth.views import (
+    LoginView,
+    LogoutView,
+    PasswordChangeView,
+    PasswordChangeDoneView,
+)
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,34 +29,48 @@ import blog.views
 import subscriptions.views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', LoginView.as_view(
-        template_name='authentication/landing.html',
-        redirect_authenticated_user=True,
-    ), name='landing'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('flux/', blog.views.flux, name='flux'),
-    path('posts/', blog.views.posts, name='posts'),
-    path('create_ticket/', blog.views.create_ticket, name='create_ticket'),
-    path('create_review/', blog.views.create_review, name='create_review'),
-    path('create_review/<int:ticket_id>/',
-         blog.views.create_review_from_ticket,
-         name='create_review_from_ticket'),
-    path('change-password', PasswordChangeView.as_view(
-        template_name='authentication/password_change_form.html'),
-         name='password_change'),
-    path('change-password-done/', PasswordChangeDoneView.as_view(
-        template_name='authentication/password_change_done.html'),
-         name='password_change_done'),
-    path('signup/', authentication.views.signup_page, name='signup'),
-    path('blog/<int:review_id>/editReview', blog.views.edit_review, name='edit_review'),
-    path('blog/<int:ticket_id>/editTicket', blog.views.edit_ticket, name='edit_ticket'),
-    path('subscriptions/', subscriptions.views.subscriptions, name='subscriptions'),
-    path('<int:pk>/delete',
-         subscriptions.views.SubscriptionDeleteView.as_view(),
-         name='subscriptions_delete')
+    path("admin/", admin.site.urls),
+    path(
+        "",
+        LoginView.as_view(
+            template_name="authentication/landing.html",
+            redirect_authenticated_user=True,
+        ),
+        name="landing",
+    ),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path("flux/", blog.views.flux, name="flux"),
+    path("posts/", blog.views.posts, name="posts"),
+    path("create_ticket/", blog.views.create_ticket, name="create_ticket"),
+    path("create_review/", blog.views.create_review, name="create_review"),
+    path(
+        "create_review/<int:ticket_id>/",
+        blog.views.create_review_from_ticket,
+        name="create_review_from_ticket",
+    ),
+    path(
+        "change-password",
+        PasswordChangeView.as_view(
+            template_name="authentication/password_change_form.html"
+        ),
+        name="password_change",
+    ),
+    path(
+        "change-password-done/",
+        PasswordChangeDoneView.as_view(
+            template_name="authentication/password_change_done.html"
+        ),
+        name="password_change_done",
+    ),
+    path("signup/", authentication.views.signup_page, name="signup"),
+    path("blog/<int:review_id>/editReview", blog.views.edit_review, name="edit_review"),
+    path("blog/<int:ticket_id>/editTicket", blog.views.edit_ticket, name="edit_ticket"),
+    path("subscriptions/", subscriptions.views.subscriptions, name="subscriptions"),
+    path(
+        "<int:pk>/delete",
+        subscriptions.views.SubscriptionDeleteView.as_view(),
+        name="subscriptions_delete",
+    ),
 ]
 if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

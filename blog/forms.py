@@ -8,11 +8,12 @@ class TicketForm(forms.ModelForm):
 
     class Meta:
         model = models.Ticket
-        fields = ['title', 'description', 'image']
-        labels = {"title": "Titre du livre",
-                  "description": "Description",
-                  "image": "Image"
-                  }
+        fields = ["title", "description", "image"]
+        labels = {
+            "title": "Titre du livre",
+            "description": "Description",
+            "image": "Image",
+        }
 
 
 class DeleteTicketForm(forms.Form):
@@ -24,21 +25,17 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = models.Review
-        fields = ['headline', 'rating', 'body']
-        labels = {"headline": "Titre de la critique",
-                  "rating": "Note",
-                  "body": "Commentaire"
-                  }
-        CHOICES = [(0, '0'),
-                   (1, '1'),
-                   (2, '2'),
-                   (3, '3'),
-                   (4, '4'),
-                   (5, '5')
-                   ]
-        widgets = {"rating": forms.RadioSelect(choices=CHOICES),
-                   "body": forms.Textarea()
-                   }
+        fields = ["headline", "rating", "body"]
+        labels = {
+            "headline": "Titre de la critique",
+            "rating": "Note",
+            "body": "Commentaire",
+        }
+        CHOICES = [(0, "0"), (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")]
+        widgets = {
+            "rating": forms.RadioSelect(choices=CHOICES),
+            "body": forms.Textarea(),
+        }
 
 
 class DeleteReviewForm(forms.Form):
