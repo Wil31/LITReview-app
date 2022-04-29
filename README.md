@@ -1,7 +1,7 @@
 # LITReview-app
 
 Site web permettant à une communauté d'utilisateurs de consulter ou de
-solliciter une critique de livres à la demande.
+solliciter une critique de livre à la demande.
 
 ## Utilisation
 
@@ -12,11 +12,11 @@ solliciter une critique de livres à la demande.
 
 ### 1 - Télécharger les fichiers
 
-* Téléchargez le zip depuis le lien:
+* Téléchargez depuis le lien:
   [https://github.com/.../main.zip](https://github.com/Wil31/LITReview-app/archive/refs/heads/main.zip)
-* Extraire le zip
+* Extraire le .zip
 
-### 2 - Configurer virtual environment
+### 2 - Configurer l'environnement virtuel
 
 * Ouvrez un terminal
 * Naviguez vers le dossier extrait _([...]\LITReview-app)_
@@ -29,11 +29,12 @@ solliciter une critique de livres à la demande.
 
 * Lancez le serveur depuis le terminal avec la
   commande `py.exe manage.py runserver`
+* Entrez l'adresse suivante dans un navigateur : [http:/127.0.0.1:8000/]()
+* Vous pouvez maintenant tester les fonctionnalités du site
 
 ## Rapport flake8
 
-Le repository contient un rapport flake8 dans le dossier _flake8_rapport_, qui
-n'affiche aucune erreur.
+Le repository contient un rapport flake8 dans le dossier _flake8_rapport_.
 Il est possible de générer un nouveau rapport avec la commande :
 
 ```bash
