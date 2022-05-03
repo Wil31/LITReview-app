@@ -30,7 +30,17 @@ solliciter une critique de livre à la demande.
 * Lancez le serveur depuis le terminal avec la
   commande `py.exe manage.py runserver`
 * Entrez l'adresse suivante dans un navigateur : [http:/127.0.0.1:8000/]()
-* Vous pouvez maintenant tester les fonctionnalités du site
+
+### 4 - Tester le site
+
+Utilisez les identifiants des comptes suivants pour essayer les
+fonctionnalités du site.
+
+**Username 1** : `Marie`  
+**MdP** : `blagnac24`
+
+**Username 2** : `testuser`  
+**MdP** : `blagnac11`
 
 ## Rapport flake8
 
